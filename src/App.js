@@ -37,19 +37,25 @@ class App extends React.Component{
   } 
 
   addPerson(person) {
-    let people = this.state.people;
-
-    people.push(person);
-
+    let users = [...this.state.people];
+    users.push(person);
     this.setState({
-      people: people
+      people: users
+    })
+  }
+
+  deletePerson(index) {
+    let users = [...this.state.people];
+    users.splice(index, 1)
+    this.setState({
+      people: users
     })
   }
 
   render() {
     let filteredPeople = this.state.people.filter(
       (person) => {
-        var fullName = `${person.name.first.toLowerCase()} ${person.name.last.toLowerCase()}`;
+        let fullName = `${person.name.first.toLowerCase()} ${person.name.last.toLowerCase()}`;
         return fullName.indexOf(this.state.search.toLowerCase()) !== -1;
       }
     );
@@ -70,10 +76,12 @@ class App extends React.Component{
             <div className="contacts-list">
               {filteredPeople.map((contact, i) => (
                 <Contacts 
-                key = {i}
-                firstName = {contact.name.first}
-                lastName = {contact.name.last}
-                phone = {contact.phone}
+                  key = {i}
+                  firstName = {contact.name.first}
+                  lastName = {contact.name.last}
+                  phone = {contact.phone}
+                  image = {contact.img}
+                  delete = {this.deletePerson.bind(this, i)}
                 />
               ))}
             </div>
@@ -81,7 +89,7 @@ class App extends React.Component{
           </div>
           <div>
           {
-            this.state.isClicked ? <Create people={this.state.people} addPerson={this.addPerson} click={this.handleClick}/> : null 
+            this.state.isClicked ? <Create addPerson={this.addPerson} click={this.handleClick}/> : null 
           }
           </div>
         </div>
