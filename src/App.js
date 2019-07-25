@@ -52,6 +52,14 @@ class App extends React.Component{
     })
   }
 
+  updateUser = (person, id) => {
+    let users = [...this.state.people];
+    users[id] = person;
+    this.setState({
+      people: users
+    })
+  }
+
   render() {
     let filteredPeople = this.state.people.filter(
       (person) => {
@@ -82,6 +90,8 @@ class App extends React.Component{
                   phone = {contact.phone}
                   image = {contact.img}
                   delete = {this.deletePerson.bind(this, i)}
+                  id = {i}
+                  update = {this.updateUser}
                 />
               ))}
             </div>

@@ -16,6 +16,7 @@ class Contacts extends React.Component {
         let title = data.target.name;
         title === 'first' || title === 'last' ? state.name[title] = data.target.value : state[title] = data.target.value;
         this.setState(state);
+        this.props.update(state, this.props.id);
     }
 
     handleEdit = () => {
@@ -26,7 +27,7 @@ class Contacts extends React.Component {
 
    render() {
       return (
-            <div className="contact">
+            <div className="contact" id={this.props.id}>
                 <div className="profile">
                     <img
                     className="profile-image" 
@@ -36,7 +37,7 @@ class Contacts extends React.Component {
                     <div>
                         <input type="text" name="first" onChange={this.changeData} placeholder={this.props.firstName}/>
                         <input type="text" name="last" onChange={this.changeData} placeholder={this.props.lastName}/> 
-                    </div> : <p className="name">{this.props.firstName} {this.props.lastName}</p>}
+                    </div> : <p className="name">{ this.props.firstName} {this.props.lastName}</p>}
                 </div>
                 {this.state.isEdit ? <input type="text" name="phone" onChange={this.changeData} placeholder={this.props.phone}/> : <p className="phone">{this.props.phone}</p>}
                 <div>

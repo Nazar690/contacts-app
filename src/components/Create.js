@@ -71,7 +71,7 @@ class Create extends React.Component {
                 </div>
                 <div className="input-field">
                     <img className="profile-img" src={this.state.img} alt=""/>
-                    <input type="file" onChange={this.onImageChange}></input>
+                    <input className="profile-img-picker" type="file" onChange={this.onImageChange}></input>
                 </div>
                 <div className="buttons">
                     <button type="submit"  className="btn btn-save">Save</button>
